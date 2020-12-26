@@ -1,46 +1,63 @@
 create table person (
-    id int(12) not null auto_increment,
+    id varchar(36) not null,
     username varchar(30) not null,
-    password varchar(30) not null,
+    password varchar(64) not null,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp on update current_timestamp,
-    email varchar(30) default null,
-    mobile_country_code varchar(5) default null,
-    mobile int(12) default null,
-    client_id int not null,
-    active tinyint(1) default true;
+    client_branch_id int not null,
+    active tinyint(1) default true,
+    unique(client_branch_id, username),
     primary key (id)
 );
 
-create table client {
+create table client (
     id int not null auto_increment,
-    name varchar(50),
-    branch Varchar(100),
+    title varchar(50),
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp on update current_timestamp,
+    unique(title),
     primary key (id)
-}
+);
 
-create table role {
+create table client_branch (
     id int not null auto_increment,
-    name varchar(20),
+    client_id int not null,
+    branch varchar (100) not null,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp on update current_timestamp,
+    unique(client_id, branch),
+    primary key(id)
+);
+
+create table role (
+    id int not null auto_increment,
+    title varchar(20),
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp on update current_timestamp,
+    unique(title),
     primary key (id)
-}
+);
 
-create table authority {
+create table authority (
     id int not null auto_increment,
-    name varchar(50) not null
+    title varchar(50) not null,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp on update current_timestamp,
+    unique(title),
     primary key (id)
-}
+);
 
-create table role_authority {
-    id int not null auto_increment,
+create table role_authority (
     role_id int not null,
     authority_id int not null,
-    primary key (id)
-}
+    created_at timestamp default current_timestamp,
+    primary key (role_id, authority_id)
+);
 
-create table user_role {
-    id int not null auto_increment,
-    user_id int not null,
+create table user_role (
+    user_id varchar(36) not null,
     role_id int not null,
-    primary key (id)
-}
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp on update current_timestamp,
+    primary key (user_id, role_id)
+);

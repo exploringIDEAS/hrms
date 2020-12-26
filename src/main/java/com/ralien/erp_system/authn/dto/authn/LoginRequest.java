@@ -1,4 +1,4 @@
-package com.ralien.erp_system.authn.models;
+package com.ralien.erp_system.authn.dto.authn;
 
 public class LoginRequest {
     private String username;

@@ -1,35 +1,36 @@
 package com.ralien.erp_system.authn;
 
-import com.ralien.erp_system.authn.entities.User;
+import com.ralien.erp_system.authn.entities.Person;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
-public class UserPrincipal implements UserDetails {
+public class PersonPrincipal implements UserDetails {
 
-    private final User user;
+    private final Person person;
 
-    public UserPrincipal(User user) {
+    public PersonPrincipal(Person person) {
         super();
-        this.user = user;
+        this.person = person;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("USER"));
+        return person.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getTitle())).collect(Collectors.toList());
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return person.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return person.getUsername();
     }
 
     @Override
@@ -49,6 +50,6 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.isActive();
+        return person.isActive();
     }
 }

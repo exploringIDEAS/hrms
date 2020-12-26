@@ -9,9 +9,9 @@ import java.util.Date;
 public class BaseEntity {
     @Id
     private long id;
-    @Column(name = "created_at")
+    @Column(name = "created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date createdAt;
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date updatedAt;
 
     public long getId() {
