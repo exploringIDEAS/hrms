@@ -30,11 +30,9 @@ public class PlainUser {
         id = person.getId();
         username = person.getUsername();
         email = person.getEmail();
-        mobile = person.getMobile();
         clientBranch = person.getClientBranch();
         createdAt = person.getCreatedAt();
-        updatedAt = person.getUpdatedAt();
-        mobileCountryCode = person.getMobileCountryCode();
+        updatedAt = person.getLastUpdatedAt();
         active = person.isActive();
         roles = person.getRoles();
     }

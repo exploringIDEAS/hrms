@@ -1,14 +1,18 @@
 package com.ralien.erp_system.authn.services.impl;
 
-import com.ralien.erp_system.authn.PersonPrincipal;
 import com.ralien.erp_system.authn.dao.PersonRepository;
+import com.ralien.erp_system.authn.entities.Authority;
 import com.ralien.erp_system.authn.entities.Person;
+import com.ralien.erp_system.authn.entities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -22,6 +26,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (person == null) {
             throw new UsernameNotFoundException("User 404");
         }
-        return new PersonPrincipal(person);
+        Collection<Authority> authorities = new ArrayList<>();
+        for (Role role: person.getRoles()) {
+            authorities.addAll(role.getAuthorities());
+        }
+        return new User(person.getUsername(), person.getPassword(), person.isActive(), true, true, true, authorities);
     }
 }

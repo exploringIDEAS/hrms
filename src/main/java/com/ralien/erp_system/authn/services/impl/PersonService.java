@@ -2,10 +2,10 @@ package com.ralien.erp_system.authn.services.impl;
 
 import com.ralien.erp_system.authn.dao.ClientBranchRepository;
 import com.ralien.erp_system.authn.dao.PersonRepository;
-import com.ralien.erp_system.authn.entities.Person;
 import com.ralien.erp_system.authn.dto.person.CreateUserRequest;
 import com.ralien.erp_system.authn.dto.person.PlainUser;
 import com.ralien.erp_system.authn.dto.person.UpdateUserRequest;
+import com.ralien.erp_system.authn.entities.Person;
 import com.ralien.erp_system.authn.services.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,11 +38,8 @@ public class PersonService implements IPersonService {
         newPerson.setUsername(request.getUsername());
         newPerson.setPassword(passwordEncoder.encode(request.getPassword()));
         newPerson.setEmail(request.getEmail());
-        newPerson.setMobile(request.getMobile());
-        newPerson.setMobileCountryCode(request.getMobileCountryCode());
         newPerson.setClientBranch(clientBranchRepository.findById(request.getClientBranchId()).orElse(null));
         personRepo.saveAndFlush(newPerson);
-
         Person addedPerson = personRepo.findByUsername(request.getUsername());
         return new PlainUser(addedPerson);
     }

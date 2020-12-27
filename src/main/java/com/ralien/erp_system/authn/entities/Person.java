@@ -2,7 +2,6 @@ package com.ralien.erp_system.authn.entities;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
-import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,16 +20,14 @@ public class Person {
     private String password;
     private boolean active;
     private String email;
-    private String mobile;
-    private String mobileCountryCode;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
     private Date createdAt;
 
     @CreationTimestamp
-    @Column(name = "updated_at", nullable = false, insertable = false, updatable = false)
-    private Date updatedAt;
+    @Column(name = "last_updated_at", nullable = false, insertable = false, updatable = false)
+    private Date lastUpdatedAt;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="client_branch_id")
@@ -75,22 +72,6 @@ public class Person {
         this.email = email;
     }
 
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getMobileCountryCode() {
-        return mobileCountryCode;
-    }
-
-    public void setMobileCountryCode(String mobileCountryCode) {
-        this.mobileCountryCode = mobileCountryCode;
-    }
-
     public ClientBranch getClientBranch() {
         return clientBranch;
     }
@@ -123,11 +104,11 @@ public class Person {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public Date getLastUpdatedAt() {
+        return lastUpdatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setLastUpdatedAt(Date lastUpdatedAt) {
+        this.lastUpdatedAt = lastUpdatedAt;
     }
 }

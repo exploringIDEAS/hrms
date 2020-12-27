@@ -3,7 +3,7 @@ create table person (
     username varchar(30) not null,
     password varchar(64) not null,
     created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp on update current_timestamp,
+    last_updated_at timestamp default current_timestamp on update current_timestamp,
     client_branch_id int not null,
     active tinyint(1) default true,
     unique(client_branch_id, username),

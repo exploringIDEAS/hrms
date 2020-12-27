@@ -1,5 +1,8 @@
 package com.ralien.erp_system.authn.entities;
 
+
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import java.util.Set;
 
