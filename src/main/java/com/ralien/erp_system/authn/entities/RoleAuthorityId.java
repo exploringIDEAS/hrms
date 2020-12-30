@@ -28,4 +28,25 @@ public class RoleAuthorityId implements Serializable {
     public void setAuthorityId(int authorityId) {
         this.authorityId = authorityId;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + roleId;
+        result = prime * result + authorityId;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        RoleAuthorityId that = (RoleAuthorityId) obj;
+        return this.roleId == that.roleId && this.authorityId == that.authorityId;
+    }
 }

@@ -10,9 +10,12 @@ public class RoleAuthority {
     @Id
     @Column(name="role_id")
     private int roleId;
+
     @Id
     @Column(name="authority_id")
     private int authorityId;
+
+    @Column(name="created_at", nullable = false, insertable = false, updatable = false)
     private Date createdAt;
 
     public int getRoleId() {

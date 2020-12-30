@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotBlank;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AddNewAuthorityRequest {
+public class AddNewAuthorityReq {
     @NotBlank
     @JsonProperty("authority")
     @Length(min=6, max=100, message = "authority length allowed between 3-20 characters")

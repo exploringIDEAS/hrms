@@ -1,24 +1,25 @@
 package com.ralien.erp_system.authn.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
 public class BaseEntity {
     @Id
-    private long id;
-    @Column(name = "created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
     private Date createdAt;
-    @Column(name = "updated_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+
+    @Column(name = "updated_at", nullable = false, insertable = false, updatable = false)
     private Date updatedAt;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

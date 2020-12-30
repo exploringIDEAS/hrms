@@ -1,11 +1,15 @@
 package com.ralien.erp_system.authn.services;
 
-import com.ralien.erp_system.authn.dto.authz.AddNewAuthorityRequest;
-import com.ralien.erp_system.authn.dto.authz.AddNewRoleRequest;
-import com.ralien.erp_system.authn.dto.authz.MapAuthorityToRoleRequest;
+import com.ralien.erp_system.authn.dto.authz.*;
 
 public interface IAuthzService {
-    void addRole(AddNewRoleRequest request);
-    void addAuthority(AddNewAuthorityRequest request);
-    void mapAuthorityToRole(MapAuthorityToRoleRequest request);
+    void addRole(AddNewRoleReq request);
+    GetAllRolesResp getAllRoles();
+    void deleteRole(int roleId);
+    void addAuthority(AddNewAuthorityReq request);
+    GetAllAuthoritiesResp getAllAuthorities();
+    void deleteAuthority(int authorityId);
+    void mapAuthorityToRole(MapAuthorityToRoleReq request);
+    void deleteMapping(int roleId, int authorityId);
+    void addPersonRoleMapping(AddNewPersonRoleMappingReq request);
 }

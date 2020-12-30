@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CreateUserRequest {
+public class CreatePersonRequest {
     @NotBlank
     private String username;
 
@@ -16,7 +16,7 @@ public class CreateUserRequest {
 
     @NotNull
     @JsonProperty("client_branch_id")
-    private long clientBranchId;
+    private int clientBranchId;
 
     private String mobile;
     private String email;
@@ -40,11 +40,11 @@ public class CreateUserRequest {
         this.password = password;
     }
 
-    public long getClientBranchId() {
+    public int getClientBranchId() {
         return clientBranchId;
     }
 
-    public void setClientBranchId(long clientBranchId) {
+    public void setClientBranchId(int clientBranchId) {
         this.clientBranchId = clientBranchId;
     }
 

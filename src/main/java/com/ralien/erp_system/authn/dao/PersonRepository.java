@@ -11,8 +11,8 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
     Person findByUsername(String username);
     @Modifying
     @Query("update Person p set p.active = false where p.id = ?1")
-    void markUserIdDeactivated(UUID userId);
+    void markPersonIdDeactivated(UUID personId);
     @Modifying
     @Query("update Person p set p.active = true where p.id = ?1")
-    void markUserIdActivated(UUID userId);
+    void markPersonIdActivated(UUID personId);
 }

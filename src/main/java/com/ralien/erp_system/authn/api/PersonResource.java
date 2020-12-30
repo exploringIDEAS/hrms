@@ -1,8 +1,8 @@
 package com.ralien.erp_system.authn.api;
 
-import com.ralien.erp_system.authn.dto.person.CreateUserRequest;
-import com.ralien.erp_system.authn.dto.person.PlainUser;
-import com.ralien.erp_system.authn.dto.person.UpdateUserRequest;
+import com.ralien.erp_system.authn.dto.person.CreatePersonRequest;
+import com.ralien.erp_system.authn.dto.person.PlainPerson;
+import com.ralien.erp_system.authn.dto.person.UpdatePersonRequest;
 import com.ralien.erp_system.authn.services.impl.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,35 +18,35 @@ import java.net.URISyntaxException;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("users")
+@RequestMapping("persons")
 public class PersonResource {
     @Autowired
     private PersonService personService;
 
-    @GetMapping("{userId}")
-    public ResponseEntity<PlainUser> get(@PathVariable @NotBlank UUID userId) {
-        return ResponseEntity.ok(personService.get(userId));
+    @GetMapping("{personId}")
+    public ResponseEntity<PlainPerson> get(@PathVariable @NotBlank UUID personId) {
+        return ResponseEntity.ok(personService.get(personId));
     }
 
     @PostMapping
-    public ResponseEntity<PlainUser> addNew(@Valid @RequestBody CreateUserRequest request) throws URISyntaxException {
+    public ResponseEntity<PlainPerson> addNew(@Valid @RequestBody CreatePersonRequest request) throws URISyntaxException {
         return ResponseEntity.created(new URI("")).body(personService.create(request));
     }
 
     @PutMapping
-    public PlainUser update(@Valid @RequestBody UpdateUserRequest request) {
+    public PlainPerson update(@Valid @RequestBody UpdatePersonRequest request) {
         return null;
     }
 
-    @PutMapping("{userId}/deactivate")
-    public ResponseEntity<String> deactivate(@NotNull @NotEmpty @PathVariable UUID userId) {
-        personService.deactivate(userId);
+    @PutMapping("{personId}/deactivate")
+    public ResponseEntity<String> deactivate(@NotNull @NotEmpty @PathVariable UUID personId) {
+        personService.deactivate(personId);
         return ResponseEntity.ok("marked deactivated");
     }
 
-    @PutMapping("{userId}/activate")
-    public ResponseEntity<String> activate(@NotNull @NotEmpty @PathVariable UUID userId) {
-        personService.activate(userId);
+    @PutMapping("{personId}/activate")
+    public ResponseEntity<String> activate(@NotNull @NotEmpty @PathVariable UUID personId) {
+        personService.activate(personId);
         return ResponseEntity.ok("marked activated");
     }
 }

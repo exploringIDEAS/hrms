@@ -2,39 +2,48 @@ package com.ralien.erp_system.authn.dto.person;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ralien.erp_system.authn.entities.ClientBranch;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ralien.erp_system.authn.dto.authz.GetRoleResp;
 import com.ralien.erp_system.authn.entities.Person;
 import com.ralien.erp_system.authn.entities.Role;
+import com.ralien.erp_system.authn.util.UnixDateTimeSerializer;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PlainUser {
+public class PlainPerson {
     private UUID id;
     private String username;
     private String email;
     private String mobile;
-    private ClientBranch clientBranch;
+    private GetClientBranchResp clientBranch;
     @JsonProperty("created_at")
+    @JsonSerialize(using = UnixDateTimeSerializer.class)
     private Date createdAt;
     @JsonProperty("updated_at")
+    @JsonSerialize(using = UnixDateTimeSerializer.class)
     private Date updatedAt;
     @JsonProperty("mobile_country_code")
     private String mobileCountryCode;
     private boolean active;
-    private Set<Role> roles;
+    private Set<GetRoleResp> roles = new HashSet<>();
 
-    public PlainUser(Person person) {
+    public PlainPerson(Person person) {
         id = person.getId();
         username = person.getUsername();
         email = person.getEmail();
-        clientBranch = person.getClientBranch();
+        clientBranch = new GetClientBranchResp(
+                new GetClientResp(person.getClientBranch().getClient().getName()),
+                new GetBranchResp(person.getClientBranch().getBranch()));
         createdAt = person.getCreatedAt();
         updatedAt = person.getLastUpdatedAt();
         active = person.isActive();
-        roles = person.getRoles();
+        for (Role role: person.getRoles()) {
+            roles.add(new GetRoleResp(role));
+        }
     }
 
     public String getUsername() {
@@ -93,19 +102,19 @@ public class PlainUser {
         this.active = active;
     }
 
-    public Set<Role> getRoles() {
+    public Set<GetRoleResp> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<GetRoleResp> roles) {
         this.roles = roles;
     }
 
-    public ClientBranch getClientBranch() {
+    public GetClientBranchResp getClientBranch() {
         return clientBranch;
     }
 
-    public void setClientBranch(ClientBranch clientBranch) {
+    public void setClientBranch(GetClientBranchResp clientBranch) {
         this.clientBranch = clientBranch;
     }
 

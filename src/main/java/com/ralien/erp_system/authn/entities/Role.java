@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "role")
-public class Role extends BaseEntity {
+public class Role extends BaseEntity implements GrantedAuthority {
     private String title;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -32,5 +32,10 @@ public class Role extends BaseEntity {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    @Override
+    public String getAuthority() {
+        return title;
     }
 }

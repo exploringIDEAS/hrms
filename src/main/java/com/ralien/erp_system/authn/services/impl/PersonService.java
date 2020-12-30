@@ -2,9 +2,9 @@ package com.ralien.erp_system.authn.services.impl;
 
 import com.ralien.erp_system.authn.dao.ClientBranchRepository;
 import com.ralien.erp_system.authn.dao.PersonRepository;
-import com.ralien.erp_system.authn.dto.person.CreateUserRequest;
-import com.ralien.erp_system.authn.dto.person.PlainUser;
-import com.ralien.erp_system.authn.dto.person.UpdateUserRequest;
+import com.ralien.erp_system.authn.dto.person.CreatePersonRequest;
+import com.ralien.erp_system.authn.dto.person.PlainPerson;
+import com.ralien.erp_system.authn.dto.person.UpdatePersonRequest;
 import com.ralien.erp_system.authn.entities.Person;
 import com.ralien.erp_system.authn.services.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +26,13 @@ public class PersonService implements IPersonService {
 
     @Override
     @Transactional
-    public PlainUser get(UUID userId) {
-        return new PlainUser(personRepo.getOne(userId));
+    public PlainPerson get(UUID personId) {
+        return new PlainPerson(personRepo.getOne(personId));
     }
 
     @Override
     @Transactional
-    public PlainUser create(CreateUserRequest request) {
+    public PlainPerson create(CreatePersonRequest request) {
         Person newPerson = new Person();
         newPerson.setId(UUID.randomUUID());
         newPerson.setUsername(request.getUsername());
@@ -41,23 +41,23 @@ public class PersonService implements IPersonService {
         newPerson.setClientBranch(clientBranchRepository.findById(request.getClientBranchId()).orElse(null));
         personRepo.saveAndFlush(newPerson);
         Person addedPerson = personRepo.findByUsername(request.getUsername());
-        return new PlainUser(addedPerson);
+        return new PlainPerson(addedPerson);
     }
 
     @Override
-    public PlainUser update(UpdateUserRequest request) {
+    public PlainPerson update(UpdatePersonRequest request) {
         return null;
     }
 
     @Override
     @Transactional
-    public void deactivate(UUID userId) {
-        personRepo.markUserIdDeactivated(userId);
+    public void deactivate(UUID personId) {
+        personRepo.markPersonIdDeactivated(personId);
     }
 
     @Override
     @Transactional
-    public void activate(UUID userId) {
-        personRepo.markUserIdActivated(userId);
+    public void activate(UUID personId) {
+        personRepo.markPersonIdActivated(personId);
     }
 }

@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 
-public class AddNewRoleRequest {
+public class AddNewRoleReq {
     @NotBlank
     @JsonProperty("role")
     @Length(min=3, max=30, message = "role length allowed between 3-20 characters")

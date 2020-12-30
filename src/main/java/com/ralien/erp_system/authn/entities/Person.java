@@ -1,7 +1,6 @@
 package com.ralien.erp_system.authn.entities;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,7 +13,7 @@ import java.util.UUID;
 @Table(name = "person")
 public class Person {
     @Id
-    @Type(type="uuid-char")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
     private String username;
     private String password;
@@ -35,8 +34,8 @@ public class Person {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name="user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
+            name="person_role",
+            joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
