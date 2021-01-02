@@ -1,11 +1,13 @@
 package com.ralien.erp_system.user.entities;
 
+import com.ralien.erp_system.user.entities.composite_id.RoleAuthorityId;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "role_authority")
-public class RoleAuthority {
+public class RoleAuthority extends AbstractIdentity<RoleAuthorityId> {
     @EmbeddedId
     private RoleAuthorityId id;
 

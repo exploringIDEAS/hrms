@@ -1,20 +1,15 @@
 package com.ralien.erp_system.user.entities;
 
+import com.ralien.erp_system.user.entities.composite_id.PersonRoleId;
+
 import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
 @Table(name = "person_role")
-@IdClass(PersonRoleId.class)
-public class PersonRole {
-    @Id
-    @Column(name = "person_id", columnDefinition = "BINARY(16)")
-    private UUID personId;
-
-    @Id
-    @Column(name = "role_id")
-    private int roleId;
+public class PersonRole extends AbstractIdentity<PersonRoleId> {
+    @EmbeddedId
+    private PersonRoleId id;
 
     @Column(nullable = false, insertable = false, updatable = false)
     private Date createdAt;
@@ -22,27 +17,13 @@ public class PersonRole {
     @Column(nullable = false, insertable = false, updatable = false)
     private Date updatedAt;
 
-    public PersonRole() {}
-
-    public PersonRole(UUID personId, int roleId) {
-        this.personId = personId;
-        this.roleId = roleId;
+    @Override
+    public PersonRoleId getId() {
+        return id;
     }
 
-    public UUID getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(UUID personId) {
-        this.personId = personId;
-    }
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setId(PersonRoleId id) {
+        this.id = id;
     }
 
     public Date getCreatedAt() {

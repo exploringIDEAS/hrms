@@ -1,8 +1,9 @@
-package com.ralien.erp_system.user.entities;
+package com.ralien.erp_system.user.entities.composite_id;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
 public class RoleAuthorityId implements Serializable {
@@ -35,23 +36,16 @@ public class RoleAuthorityId implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + roleId;
-        result = prime * result + authorityId;
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RoleAuthorityId)) return false;
+        RoleAuthorityId that = (RoleAuthorityId) o;
+        return roleId == that.roleId &&
+                authorityId == that.authorityId;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || obj.getClass() != this.getClass()) {
-            return false;
-        }
-        RoleAuthorityId that = (RoleAuthorityId) obj;
-        return this.roleId == that.roleId && this.authorityId == that.authorityId;
+    public int hashCode() {
+        return Objects.hash(roleId, authorityId);
     }
 }

@@ -1,8 +1,10 @@
 package com.ralien.erp_system.user.services.impl;
 
+import com.ralien.erp_system.user.entities.composite_id.PersonRoleId;
 import com.ralien.erp_system.user.dao.*;
 import com.ralien.erp_system.user.dto.authz.*;
 import com.ralien.erp_system.user.entities.*;
+import com.ralien.erp_system.user.entities.composite_id.RoleAuthorityId;
 import com.ralien.erp_system.user.services.IAuthzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,7 +63,7 @@ public class AuthzService implements IAuthzService {
         if (!personRoleMappings.isEmpty()) {
             List<UUID> personIds = new ArrayList<>();
             for (PersonRole personRoleMapping : personRoleMappings) {
-                personIds.add(personRoleMapping.getPersonId());
+                personIds.add(personRoleMapping.getId().getPersonId());
             }
             personRoleRepository.deleteMappingsByRoleId(personIds, roleId);
         }
@@ -100,7 +102,7 @@ public class AuthzService implements IAuthzService {
             if (!personRoleMappings.isEmpty()) {
                 List<UUID> personIds = new ArrayList<>();
                 for (PersonRole personRoleMapping : personRoleMappings) {
-                    personIds.add(personRoleMapping.getPersonId());
+                    personIds.add(personRoleMapping.getId().getPersonId());
                 }
                 personRoleRepository.deleteMappingsByRoleIds(personIds, roleIds);
             }
@@ -138,7 +140,9 @@ public class AuthzService implements IAuthzService {
         Person person = personRepository.findByUsername(request.getUsername());
         Optional<Role> role = roleRepository.findById(request.getRoleId());
         if (role.isPresent() && person != null){
-            personRoleRepository.save(new PersonRole(person.getId(), request.getRoleId()));
+            PersonRole personRole = new PersonRole();
+            personRole.setId(new PersonRoleId(person.getId(), request.getRoleId()));
+            personRoleRepository.save(personRole);
         }
     }
 }

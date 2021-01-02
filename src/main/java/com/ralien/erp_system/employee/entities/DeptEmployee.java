@@ -7,32 +7,24 @@ import java.util.Date;
 
 @Entity
 @Table(name = "dept_employee")
-@IdClass(DeptEmployeeId.class)
-public class DeptEmployee extends BaseEntity {
-    @Id
-    @Column(name = "emp_id")
-    private int empId;
-
-    @Id
-    @Column(name = "dept_id")
-    private short deptId;
+public class DeptEmployee extends AbstractIdentity<DeptEmployeeId> {
+    @EmbeddedId
+    private DeptEmployeeId id;
     private Date fromDate;
     private Date toDate;
+    @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
+    private Date createdAt;
 
-    public int getEmpId() {
-        return empId;
+    @Column(name = "updated_at", nullable = false, insertable = false, updatable = false)
+    private Date updatedAt;
+
+    @Override
+    public DeptEmployeeId getId() {
+        return id;
     }
 
-    public void setEmpId(int empId) {
-        this.empId = empId;
-    }
-
-    public short getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(short deptId) {
-        this.deptId = deptId;
+    public void setId(DeptEmployeeId id) {
+        this.id = id;
     }
 
     public Date getFromDate() {
@@ -49,5 +41,21 @@ public class DeptEmployee extends BaseEntity {
 
     public void setToDate(Date toDate) {
         this.toDate = toDate;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

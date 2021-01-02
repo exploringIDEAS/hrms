@@ -39,7 +39,7 @@ public class PersonService implements IPersonService {
         newPerson.setPassword(passwordEncoder.encode(request.getPassword()));
         newPerson.setEmail(request.getEmail());
         newPerson.setClientBranch(clientBranchRepository.findById(request.getClientBranchId()).orElse(null));
-        personRepo.saveAndFlush(newPerson);
+        personRepo.save(newPerson);
         Person addedPerson = personRepo.findByUsername(request.getUsername());
         return new PlainPerson(addedPerson);
     }

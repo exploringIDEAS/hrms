@@ -1,5 +1,6 @@
 package com.ralien.erp_system.employee.entities;
 
+import com.ralien.erp_system.employee.entities.composite_id.DeptEmployeeId;
 import com.ralien.erp_system.employee.entities.composite_id.DeptManagerId;
 
 import javax.persistence.*;
@@ -7,33 +8,22 @@ import java.util.Date;
 
 @Entity
 @Table(name = "dept_manager")
-@IdClass(DeptManagerId.class)
-public class DeptManager extends BaseEntity {
-    @Id
-    @Column(name = "emp_id")
-    private int empId;
+public class DeptManager extends AbstractIdentity<DeptManagerId> {
+    @EmbeddedId
+    private DeptManagerId id;
 
-    @Id
-    @Column(name = "dept_id")
-    private short deptId;
+    @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
+    private Date createdAt;
+
+    @Column(name = "updated_at", nullable = false, insertable = false, updatable = false)
+    private Date updatedAt;
 
     private Date fromDate;
     private Date toDate;
 
-    public int getEmpId() {
-        return empId;
-    }
-
-    public void setEmpId(int empId) {
-        this.empId = empId;
-    }
-
-    public short getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(short deptId) {
-        this.deptId = deptId;
+    @Override
+    public DeptManagerId getId() {
+        return id;
     }
 
     public Date getFromDate() {
@@ -50,5 +40,21 @@ public class DeptManager extends BaseEntity {
 
     public void setToDate(Date toDate) {
         this.toDate = toDate;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

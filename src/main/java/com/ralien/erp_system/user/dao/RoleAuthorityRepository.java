@@ -1,7 +1,7 @@
 package com.ralien.erp_system.user.dao;
 
 import com.ralien.erp_system.user.entities.RoleAuthority;
-import com.ralien.erp_system.user.entities.RoleAuthorityId;
+import com.ralien.erp_system.user.entities.composite_id.RoleAuthorityId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

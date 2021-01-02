@@ -1,10 +1,16 @@
-package com.ralien.erp_system.user.entities;
+package com.ralien.erp_system.user.entities.composite_id;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
+@Embeddable
 public class PersonRoleId implements Serializable {
+    @Column(name = "person_id")
     private UUID personId;
+    @Column(name = "role_id")
     private int roleId;
 
     public PersonRoleId() {}
@@ -31,23 +37,16 @@ public class PersonRoleId implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + roleId;
-        result = prime * result + personId.hashCode();
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PersonRoleId)) return false;
+        PersonRoleId that = (PersonRoleId) o;
+        return roleId == that.roleId &&
+                Objects.equals(personId, that.personId);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || obj.getClass() != this.getClass()) {
-            return false;
-        }
-        PersonRoleId that = (PersonRoleId) obj;
-        return this.personId.equals(that.personId) && this.roleId== that.roleId;
+    public int hashCode() {
+        return Objects.hash(personId, roleId);
     }
 }
