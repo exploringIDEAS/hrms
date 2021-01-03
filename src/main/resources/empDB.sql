@@ -1,30 +1,27 @@
 create table employee (
     id int not null auto_increment,
     user_id binary(16) not null,
-    dob date not null,
+    birth_date date not null,
     first_name varchar(30) not null,
     last_name varchar(20) not null,
-    gender enum ('M','F', 'O') not null,
+    gender varchar(1) not null,
     email varchar(30) default null,
     hire_date date not null,
-    mobile int(12) default null,
-    curr_dept_id smallint not null,
-    curr_designation_id smallint not null,
-    compensation_id int not null,
+    mobile bigint default null,
+    dept_id int default null,
+    designation_id int default null,
+    compensation_id int default null,
     curr_address varchar(400),
-    curr_zipcode int default null,
-    curr_country varchar(30) default null,
     perm_address varchar(400),
-    perm_zipcode int default null,
-    perm_country varchar(30) default null,
-    alt_mobile int(12) default null,
+    alt_mobile bigint default null,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp on update current_timestamp,
+    unique(user_id),
     primary key (id)
 );
 
 create table department (
-    id smallint not null auto_increment,
+    id int not null auto_increment,
     title varchar(40) not null,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp on update current_timestamp,
@@ -33,9 +30,9 @@ create table department (
 );
 
 create table designation (
-    id smallint not null auto_increment,
+    id int not null auto_increment,
     title varchar (50) not null,
-    grade smallint default -1,
+    grade int default -1,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp on update current_timestamp,
     unique (title),
@@ -44,32 +41,32 @@ create table designation (
 
 create table dept_manager (
    emp_id int not null auto_increment,
-   dept_id smallint not null,
+   dept_id int not null,
    from_date date not null,
    to_date date default null,
    created_at timestamp default current_timestamp,
    updated_at timestamp default current_timestamp on update current_timestamp,
-   primary key (emp_id, dept_id)
+   primary key (emp_id, dept_id, from_date)
 );
 
 create table dept_employee (
     emp_id int not null,
-    dept_id smallint not null,
+    dept_id int not null,
     from_date date not null,
     to_date date default null,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp on update current_timestamp,
-    primary key (emp_id, dept_id)
+    primary key (emp_id, dept_id, from_date)
 );
 
 create table emp_designation (
     emp_id int not null,
-    designation_id smallint not null,
+    designation_id int not null,
     from_date date not null,
     to_date date default null,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp on update current_timestamp,
-    primary key (emp_id, designation_id)
+    primary key (emp_id, designation_id, from_date)
 );
 
 create table emp_compensation (
@@ -78,11 +75,11 @@ create table emp_compensation (
     from_date date not null,
     to_date date default null,
     created_at timestamp default current_timestamp,
-    primary key (emp_id, compensation_id)
+    primary key (emp_id, compensation_id, from_date)
 );
 
 create table compensation (
-    id smallint not null,
+    id int not null auto_increment,
     basic_salary int not null,
     da int default 0,
     hra int default 0,

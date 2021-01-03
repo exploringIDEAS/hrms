@@ -1,30 +1,51 @@
-package com.ralien.erp_system.employee.entities;
+package com.ralien.erp_system.employee.dto;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ralien.erp_system.employee.entities.Compensation;
+import com.ralien.erp_system.employee.util.UnixDateTimeSerializer;
+
 import java.util.Date;
 
-@Entity
-@Table(name = "compensation")
-public class Compensation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CompensationResp {
     private int id;
     private int basicSalary;
-    private int da; // dearness allowance
-    private int hra; // house rental allowance
-    private int ca; // conveyance allowance
-    private int lta; // leave travel allowance
-    private int ma; // medical allowance
-    private int bpa; // Books and Periodicals Allowance
+    private int da;
+    private int hra;
+    private int ca;
+    private int lta;
+    private int ma;
+    private int bpa;
     private int gratuity;
-    private int epf; // employer provident fund
-    private int pt; // professional tax
-    private int perfBonus; // performance bonus
-    @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
+    private int epf;
+    private int pt;
+    private int perfBonus;
+    @JsonSerialize(using = UnixDateTimeSerializer.class)
     private Date createdAt;
+
+    public CompensationResp() {}
+
+    public CompensationResp(Compensation compensation) {
+        id = compensation.getId();
+        basicSalary = compensation.getBasicSalary();
+        da = compensation.getDa();
+        hra = compensation.getHra();
+        ca = compensation.getCa();
+        lta = compensation.getLta();
+        ma = compensation.getMa();
+        bpa = compensation.getBpa();
+        gratuity = compensation.getGratuity();
+        epf = compensation.getEpf();
+        pt = compensation.getPt();
+        perfBonus = compensation.getPerfBonus();
+        createdAt = compensation.getCreatedAt();
+    }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getBasicSalary() {

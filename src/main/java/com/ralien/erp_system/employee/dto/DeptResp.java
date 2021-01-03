@@ -3,22 +3,22 @@ package com.ralien.erp_system.employee.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetDeptResp {
-    private short deptId;
+public class DeptResp {
+    private int deptId;
     private String deptTitle;
 
-    public GetDeptResp() {}
+    public DeptResp() {}
 
-    public GetDeptResp(short deptId, String deptTitle) {
+    public DeptResp(int deptId, String deptTitle) {
         this.deptId = deptId;
         this.deptTitle = deptTitle;
     }
 
-    public short getDeptId() {
+    public int getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(short deptId) {
+    public void setDeptId(int deptId) {
         this.deptId = deptId;
     }
 

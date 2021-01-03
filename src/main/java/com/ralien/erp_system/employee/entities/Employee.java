@@ -17,7 +17,7 @@ public class Employee extends BaseEntity {
     @Column(columnDefinition = "BINARY(16)")
     private UUID userId;
 
-    private Date dob;
+    private Date birthDate;
     private String firstName;
     private String lastName;
     private String email;
@@ -26,11 +26,7 @@ public class Employee extends BaseEntity {
     private long mobile;
     private long altMobile;
     private String currAddress;
-    private int currZipcode;
-    private String currCountry;
     private String permAddress;
-    private int permZipcode;
-    private String permCountry;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dept_id")
@@ -56,12 +52,12 @@ public class Employee extends BaseEntity {
         this.userId = userId;
     }
 
-    public Date getDob() {
-        return dob;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getFirstName() {
@@ -128,44 +124,12 @@ public class Employee extends BaseEntity {
         this.currAddress = currAddress;
     }
 
-    public int getCurrZipcode() {
-        return currZipcode;
-    }
-
-    public void setCurrZipcode(int currZipcode) {
-        this.currZipcode = currZipcode;
-    }
-
-    public String getCurrCountry() {
-        return currCountry;
-    }
-
-    public void setCurrCountry(String currCountry) {
-        this.currCountry = currCountry;
-    }
-
     public String getPermAddress() {
         return permAddress;
     }
 
     public void setPermAddress(String permAddress) {
         this.permAddress = permAddress;
-    }
-
-    public int getPermZipcode() {
-        return permZipcode;
-    }
-
-    public void setPermZipcode(int permZipcode) {
-        this.permZipcode = permZipcode;
-    }
-
-    public String getPermCountry() {
-        return permCountry;
-    }
-
-    public void setPermCountry(String permCountry) {
-        this.permCountry = permCountry;
     }
 
     public Department getDepartment() {

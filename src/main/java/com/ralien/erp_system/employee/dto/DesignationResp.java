@@ -1,18 +1,25 @@
 package com.ralien.erp_system.employee.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class AddNewDesignationReq {
-    @NotBlank
-    @Length(max=50)
+public class DesignationResp {
+    private int id;
     private String designationTitle;
-    @Positive
     private int grade;
+
+    public DesignationResp() {}
+
+    public DesignationResp(int id, String designationTitle, int grade) {
+        this.id = id;
+        this.designationTitle = designationTitle;
+        this.grade = grade;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getDesignationTitle() {
         return designationTitle;

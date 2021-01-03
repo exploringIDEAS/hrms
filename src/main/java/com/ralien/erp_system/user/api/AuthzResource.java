@@ -1,6 +1,7 @@
 package com.ralien.erp_system.user.api;
 
 import com.ralien.erp_system.user.dto.authz.*;
+import com.ralien.erp_system.user.services.IAuthzService;
 import com.ralien.erp_system.user.services.impl.AuthzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.net.URISyntaxException;
 public class AuthzResource {
 
     @Autowired
-    private AuthzService authzService;
+    private IAuthzService authzService;
 
     @PostMapping("/authorities")
     public ResponseEntity<String> addNewAuthority(@Valid @RequestBody AddNewAuthorityReq request) throws URISyntaxException {

@@ -4,15 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ralien.erp_system.employee.util.Gender;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.UUID;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddNewEmployeeReq {
-    @NotBlank
-    @Length(max=30)
-    private String username;
+    @NotNull
+    private UUID userId;
     @NotBlank
     @Length(max=30)
     private String firstName;
@@ -21,37 +22,20 @@ public class AddNewEmployeeReq {
     private String lastName;
     @NotNull
     private Gender gender;
-    @NotBlank
+    @Email
     @Length(max=30)
     private String email;
     private Date hireDate;
+    @NotNull
+    private Date birthDate;
     private long mobile;
     private long altMobile;
-    private short deptId;
-    private short designationId;
-    private int compensationId;
     @NotBlank
     @Length(max=400)
     private String currAddress;
-    private int currZipcode;
-    @NotBlank
-    @Length(max=30)
-    private String currCountry;
     @NotBlank
     @Length(max=400)
     private String permAddress;
-    private int permZipcode;
-    @NotBlank
-    @Length(max=30)
-    private String permCountry;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -109,52 +93,12 @@ public class AddNewEmployeeReq {
         this.altMobile = altMobile;
     }
 
-    public short getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(short deptId) {
-        this.deptId = deptId;
-    }
-
-    public short getDesignationId() {
-        return designationId;
-    }
-
-    public void setDesignationId(short designationId) {
-        this.designationId = designationId;
-    }
-
-    public int getCompensationId() {
-        return compensationId;
-    }
-
-    public void setCompensationId(int compensationId) {
-        this.compensationId = compensationId;
-    }
-
     public String getCurrAddress() {
         return currAddress;
     }
 
     public void setCurrAddress(String currAddress) {
         this.currAddress = currAddress;
-    }
-
-    public int getCurrZipcode() {
-        return currZipcode;
-    }
-
-    public void setCurrZipcode(int currZipcode) {
-        this.currZipcode = currZipcode;
-    }
-
-    public String getCurrCountry() {
-        return currCountry;
-    }
-
-    public void setCurrCountry(String currCountry) {
-        this.currCountry = currCountry;
     }
 
     public String getPermAddress() {
@@ -165,42 +109,19 @@ public class AddNewEmployeeReq {
         this.permAddress = permAddress;
     }
 
-    public int getPermZipcode() {
-        return permZipcode;
+    public UUID getUserId() {
+        return userId;
     }
 
-    public void setPermZipcode(int permZipcode) {
-        this.permZipcode = permZipcode;
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
-    public String getPermCountry() {
-        return permCountry;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setPermCountry(String permCountry) {
-        this.permCountry = permCountry;
-    }
-
-    @Override
-    public String toString() {
-        return "AddNewEmployeeReq{" +
-                "username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender=" + gender +
-                ", email='" + email + '\'' +
-                ", hireDate=" + hireDate +
-                ", mobile=" + mobile +
-                ", altMobile=" + altMobile +
-                ", deptId=" + deptId +
-                ", designationId=" + designationId +
-                ", compensationId=" + compensationId +
-                ", currAddress='" + currAddress + '\'' +
-                ", currZipcode=" + currZipcode +
-                ", currCountry='" + currCountry + '\'' +
-                ", permAddress='" + permAddress + '\'' +
-                ", permZipcode=" + permZipcode +
-                ", permCountry='" + permCountry + '\'' +
-                '}';
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 }

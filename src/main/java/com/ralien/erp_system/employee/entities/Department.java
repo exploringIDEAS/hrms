@@ -9,7 +9,7 @@ import java.util.List;
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private short id;
+    private int id;
     private String title;
     @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
     private Date createdAt;
@@ -17,7 +17,7 @@ public class Department {
     @Column(name = "updated_at", nullable = false, insertable = false, updatable = false)
     private Date updatedAt;
 
-    public short getId() {
+    public int getId() {
         return id;
     }
 

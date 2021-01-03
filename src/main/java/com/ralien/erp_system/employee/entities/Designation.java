@@ -9,7 +9,7 @@ public class Designation extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
-    private short grade;
+    private int grade;
 
     public int getId() {
         return id;
@@ -23,11 +23,11 @@ public class Designation extends BaseEntity {
         this.title = title;
     }
 
-    public short getGrade() {
+    public int getGrade() {
         return grade;
     }
 
-    public void setGrade(short grade) {
+    public void setGrade(int grade) {
         this.grade = grade;
     }
 }

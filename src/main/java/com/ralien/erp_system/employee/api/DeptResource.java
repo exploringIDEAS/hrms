@@ -1,30 +1,36 @@
 package com.ralien.erp_system.employee.api;
 
+import com.ralien.erp_system.employee.dto.AddEmpInDeptReq;
 import com.ralien.erp_system.employee.dto.AddNewDepartmentReq;
-import com.ralien.erp_system.employee.services.impl.DeptServiceImpl;
+import com.ralien.erp_system.employee.services.IDeptService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/departments")
 public class DeptResource {
 
     @Autowired
-    private DeptServiceImpl deptService;
+    private IDeptService deptService;
 
     @PostMapping
-    public ResponseEntity<String> addNewDept(@Valid @RequestBody AddNewDepartmentReq request) throws URISyntaxException {
+    public ResponseEntity<Object> addNewDept(@Valid @RequestBody AddNewDepartmentReq request) {
         deptService.addNewDept(request);
-        return ResponseEntity.created(new URI("")).body("created");
+        return new ResponseEntity<>("created", HttpStatus.CREATED);
     }
 
     @GetMapping("all")
-    public ResponseEntity<String> getAllDept() {
-        return null;
+    public ResponseEntity<Object> getAllDept() {
+        return ResponseEntity.ok(deptService.getAllDeptList());
+    }
+
+    @PostMapping("/employees")
+    public ResponseEntity<Object> addNewEmployee(@Valid @RequestBody AddEmpInDeptReq req) {
+        deptService.addEmpInDept(req);
+        return new ResponseEntity<>("added", HttpStatus.CREATED);
     }
 }

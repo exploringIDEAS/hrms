@@ -21,6 +21,10 @@ public class EmpCompensation extends AbstractIdentity<EmpCompensationId> {
         return id;
     }
 
+    public void setId(EmpCompensationId id) {
+        this.id = id;
+    }
+
     public Date getFromDate() {
         return fromDate;
     }

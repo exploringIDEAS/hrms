@@ -12,11 +12,11 @@ public class EmpCompensationId implements Serializable {
     @Column(name = "emp_id")
     private int empId;
     @Column(name = "compensation_id")
-    private short compensationId;
+    private int compensationId;
 
     public EmpCompensationId() {}
 
-    public EmpCompensationId(int empId, short compensationId) {
+    public EmpCompensationId(int empId, int compensationId) {
         this.empId = empId;
         this.compensationId = compensationId;
     }
@@ -29,11 +29,11 @@ public class EmpCompensationId implements Serializable {
         this.empId = empId;
     }
 
-    public short getCompensationId() {
+    public int getCompensationId() {
         return compensationId;
     }
 
-    public void setCompensationId(short compensationId) {
+    public void setCompensationId(int compensationId) {
         this.compensationId = compensationId;
     }
 

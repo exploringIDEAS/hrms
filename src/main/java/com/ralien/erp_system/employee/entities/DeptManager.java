@@ -26,6 +26,10 @@ public class DeptManager extends AbstractIdentity<DeptManagerId> {
         return id;
     }
 
+    public void setId(DeptManagerId id) {
+        this.id = id;
+    }
+
     public Date getFromDate() {
         return fromDate;
     }

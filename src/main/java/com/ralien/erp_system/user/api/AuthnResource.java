@@ -4,6 +4,7 @@ import com.ralien.erp_system.user.dto.authn.LoginRequest;
 import com.ralien.erp_system.user.dto.authn.LoginResponse;
 import com.ralien.erp_system.user.dto.authn.ResetPasswordRequest;
 import com.ralien.erp_system.user.dto.authn.UpdatePasswordRequest;
+import com.ralien.erp_system.user.services.IAuthnService;
 import com.ralien.erp_system.user.services.impl.AuthnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import javax.validation.Valid;
 public class AuthnResource {
 
     @Autowired
-    private AuthnService authnService;
+    private IAuthnService authnService;
 
     @PostMapping("login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) throws Exception {

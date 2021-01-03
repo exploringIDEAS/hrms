@@ -3,25 +3,25 @@ package com.ralien.erp_system.user.api;
 import com.ralien.erp_system.user.dto.person.CreatePersonRequest;
 import com.ralien.erp_system.user.dto.person.PlainPerson;
 import com.ralien.erp_system.user.dto.person.UpdatePersonRequest;
+import com.ralien.erp_system.user.services.IPersonService;
 import com.ralien.erp_system.user.services.impl.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping("persons")
 public class PersonResource {
+
     @Autowired
-    private PersonService personService;
+    private IPersonService personService;
 
     @GetMapping("{personId}")
     public ResponseEntity<PlainPerson> get(@PathVariable @NotBlank UUID personId) {
@@ -29,8 +29,8 @@ public class PersonResource {
     }
 
     @PostMapping
-    public ResponseEntity<PlainPerson> addNew(@Valid @RequestBody CreatePersonRequest request) throws URISyntaxException {
-        return ResponseEntity.created(new URI("")).body(personService.create(request));
+    public ResponseEntity<Object> addNew(@Valid @RequestBody CreatePersonRequest request) {
+        return new ResponseEntity<>(personService.create(request), HttpStatus.CREATED);
     }
 
     @PutMapping

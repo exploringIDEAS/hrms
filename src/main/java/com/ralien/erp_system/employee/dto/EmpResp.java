@@ -6,32 +6,28 @@ import com.ralien.erp_system.employee.util.Gender;
 import java.util.Date;
 import java.util.UUID;
 
-public class GetEmpResp {
+public class EmpResp {
     private int empId;
     private UUID userId;
-    private Date dob;
     private String firstName;
     private String lastName;
     private Gender gender;
     private String email;
     private Date hireDate;
+    private Date birthDate;
     private long mobile;
     private long altMobile;
     private String department;
     private String designation;
     private String currAddress;
-    private int currZipcode;
-    private String currCountry;
     private String permAddress;
-    private int permZipcode;
-    private String permCountry;
 
-    public GetEmpResp() {}
+    public EmpResp() {}
 
-    public GetEmpResp(Employee emp) {
+    public EmpResp(Employee emp) {
         empId = emp.getId();
         userId = emp.getUserId();
-        dob = emp.getDob();
+        birthDate = emp.getBirthDate();
         firstName = emp.getFirstName();
         lastName = emp.getLastName();
         gender = emp.getGender();
@@ -39,14 +35,10 @@ public class GetEmpResp {
         hireDate = emp.getHireDate();
         mobile = emp.getMobile();
         altMobile = emp.getAltMobile();
-    }
-
-    public int getEmpId() {
-        return empId;
-    }
-
-    public void setEmpId(int empId) {
-        this.empId = empId;
+        department = emp.getDepartment().getTitle();
+        designation = emp.getDesignation().getTitle();
+        currAddress = emp.getCurrAddress();
+        permAddress = emp.getPermAddress();
     }
 
     public UUID getUserId() {
@@ -57,12 +49,12 @@ public class GetEmpResp {
         this.userId = userId;
     }
 
-    public Date getDob() {
-        return dob;
+    public int getEmpId() {
+        return empId;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setEmpId(int empId) {
+        this.empId = empId;
     }
 
     public String getFirstName() {
@@ -145,20 +137,12 @@ public class GetEmpResp {
         this.currAddress = currAddress;
     }
 
-    public int getCurrZipcode() {
-        return currZipcode;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setCurrZipcode(int currZipcode) {
-        this.currZipcode = currZipcode;
-    }
-
-    public String getCurrCountry() {
-        return currCountry;
-    }
-
-    public void setCurrCountry(String currCountry) {
-        this.currCountry = currCountry;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getPermAddress() {
@@ -167,45 +151,5 @@ public class GetEmpResp {
 
     public void setPermAddress(String permAddress) {
         this.permAddress = permAddress;
-    }
-
-    public int getPermZipcode() {
-        return permZipcode;
-    }
-
-    public void setPermZipcode(int permZipcode) {
-        this.permZipcode = permZipcode;
-    }
-
-    public String getPermCountry() {
-        return permCountry;
-    }
-
-    public void setPermCountry(String permCountry) {
-        this.permCountry = permCountry;
-    }
-
-    @Override
-    public String toString() {
-        return "GetEmpResp{" +
-                "empId=" + empId +
-                ", userId=" + userId +
-                ", dob=" + dob +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender=" + gender +
-                ", email='" + email + '\'' +
-                ", hireDate=" + hireDate +
-                ", mobile=" + mobile +
-                ", altMobile=" + altMobile +
-                ", department='" + department + '\'' +
-                ", designation='" + designation + '\'' +
-                ", currAddress='" + currAddress + '\'' +
-                ", currZipcode=" + currZipcode +
-                ", currCountry='" + currCountry + '\'' +
-                ", permAddress='" + permAddress + '\'' +
-                ", permZipcode=" + permZipcode +
-                ", permCountry='" + permCountry + '\'' +
-                '}';
     }
 }
