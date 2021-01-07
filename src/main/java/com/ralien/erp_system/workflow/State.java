@@ -1,0 +1,12 @@
+package com.ralien.erp_system.workflow;
+
+public enum State {
+    EMP_WF_CREATED,
+    EMP_ONBOARDING_STARTED,
+    USER_CREATED,
+    PERSONAL_INFO_SAVED,
+    DEPARTMENT_ASSIGNED,
+    DESIGNATION_ASSIGNED,
+    COMPENSATION_ASSIGNED,
+    FINISHED_ONBOARDING
+}

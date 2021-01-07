@@ -3,7 +3,7 @@ package com.ralien.erp_system.employee.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "designation")
+@Table(name = "emp_designation")
 public class Designation extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

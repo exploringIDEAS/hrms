@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "authority")
+@Table(name = "user_authority")
 public class Authority extends BaseEntity implements GrantedAuthority {
     private String title;
 

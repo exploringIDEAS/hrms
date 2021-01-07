@@ -8,7 +8,7 @@ import java.util.UUID;
 // Person is User only
 
 @Entity
-@Table(name = "person")
+@Table(name = "user_person")
 public class Person {
     @Id
     @Column(columnDefinition = "BINARY(16)")
@@ -30,7 +30,7 @@ public class Person {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name="person_role",
+            name="user_person_role",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;

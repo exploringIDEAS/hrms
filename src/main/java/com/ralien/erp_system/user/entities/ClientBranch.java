@@ -3,7 +3,7 @@ package com.ralien.erp_system.user.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "client_branch")
+@Table(name = "user_client_branch")
 public class ClientBranch extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="client_id")

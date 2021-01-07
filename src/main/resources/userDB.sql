@@ -1,4 +1,4 @@
-create table person (
+create table user_person (
     id BINARY(16) not null,
     username varchar(30) not null,
     password varchar(64) not null,
@@ -11,7 +11,7 @@ create table person (
     primary key (id)
 );
 
-create table client (
+create table user_client (
     id int not null auto_increment,
     title varchar(50),
     created_at timestamp default current_timestamp,
@@ -20,7 +20,7 @@ create table client (
     primary key (id)
 );
 
-create table client_branch (
+create table user_client_branch (
     id int not null auto_increment,
     client_id int not null,
     branch varchar (100) not null,
@@ -30,7 +30,7 @@ create table client_branch (
     primary key(id)
 );
 
-create table role (
+create table user_role (
     id int not null auto_increment,
     title varchar(20),
     created_at timestamp default current_timestamp,
@@ -39,7 +39,7 @@ create table role (
     primary key (id)
 );
 
-create table authority (
+create table user_authority (
     id int not null auto_increment,
     title varchar(50) not null,
     created_at timestamp default current_timestamp,
@@ -48,14 +48,14 @@ create table authority (
     primary key (id)
 );
 
-create table role_authority (
+create table user_role_authority (
     role_id int not null,
     authority_id int not null,
     created_at timestamp default current_timestamp,
     primary key (role_id, authority_id)
 );
 
-create table person_role (
+create table user_person_role (
     person_id binary(16) not null,
     role_id int not null,
     created_at timestamp default current_timestamp,

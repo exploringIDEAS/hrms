@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "dept_manager")
+@Table(name = "emp_dept_manager")
 public class DeptManager extends AbstractIdentity<DeptManagerId> {
     @EmbeddedId
     private DeptManagerId id;

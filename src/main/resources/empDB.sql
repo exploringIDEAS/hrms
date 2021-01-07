@@ -1,4 +1,4 @@
-create table employee (
+create table emp_employee (
     id int not null auto_increment,
     user_id binary(16) not null,
     birth_date date not null,
@@ -20,7 +20,7 @@ create table employee (
     primary key (id)
 );
 
-create table department (
+create table emp_department (
     id int not null auto_increment,
     title varchar(40) not null,
     created_at timestamp default current_timestamp,
@@ -29,7 +29,7 @@ create table department (
     unique  key (title)
 );
 
-create table designation (
+create table emp_designation (
     id int not null auto_increment,
     title varchar (50) not null,
     grade int default -1,
@@ -39,7 +39,7 @@ create table designation (
     primary key (id)
 );
 
-create table dept_manager (
+create table emp_dept_manager (
    emp_id int not null auto_increment,
    dept_id int not null,
    from_date date not null,
@@ -49,7 +49,7 @@ create table dept_manager (
    primary key (emp_id, dept_id, from_date)
 );
 
-create table dept_employee (
+create table emp_dept_employee (
     emp_id int not null,
     dept_id int not null,
     from_date date not null,
@@ -59,7 +59,7 @@ create table dept_employee (
     primary key (emp_id, dept_id, from_date)
 );
 
-create table emp_designation (
+create table emp_emp_designation (
     emp_id int not null,
     designation_id int not null,
     from_date date not null,
@@ -69,7 +69,7 @@ create table emp_designation (
     primary key (emp_id, designation_id, from_date)
 );
 
-create table emp_compensation (
+create table emp_emp_compensation (
     emp_id int not null,
     compensation_id int not null,
     from_date date not null,
@@ -78,7 +78,7 @@ create table emp_compensation (
     primary key (emp_id, compensation_id, from_date)
 );
 
-create table compensation (
+create table emp_compensation (
     id int not null auto_increment,
     basic_salary int not null,
     da int default 0,
