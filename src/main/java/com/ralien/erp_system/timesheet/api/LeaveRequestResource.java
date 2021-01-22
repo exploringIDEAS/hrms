@@ -24,7 +24,7 @@ public class LeaveRequestResource {
     }
 
     @PutMapping("{leave_req_id}")
-    public ResponseEntity<Object> updateLeaveReq(@PathVariable int leaveReqId, @Valid @RequestBody UpdateLeaveReq req) {
+    public ResponseEntity<Object> updateLeaveReq(@PathVariable("leave_req_id") int leaveReqId, @Valid @RequestBody UpdateLeaveReq req) {
         leaveReqService.updateLeaveReq(leaveReqId, req);
         return new ResponseEntity<>("updated", HttpStatus.NO_CONTENT);
     }

@@ -23,7 +23,7 @@ public class EmpLeaveStockResource {
     }
 
     @PutMapping("{leave_stock_id}")
-    public ResponseEntity<Object> updateEmpLeaveStock(@PathVariable int leaveStockId, @Valid @RequestBody UpdateEmpLeaveStockReq req) {
+    public ResponseEntity<Object> updateEmpLeaveStock(@PathVariable("leave_stock_id") int leaveStockId, @Valid @RequestBody UpdateEmpLeaveStockReq req) {
         empLeaveStockService.updateLeaveStock(leaveStockId, req);
         return new ResponseEntity<>("updated", HttpStatus.NO_CONTENT);
     }

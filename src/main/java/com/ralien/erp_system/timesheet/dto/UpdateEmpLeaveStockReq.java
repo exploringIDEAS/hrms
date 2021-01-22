@@ -1,21 +1,23 @@
 package com.ralien.erp_system.timesheet.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class UpdateEmpLeaveStockReq {
+    @Positive
     private int empId;
-    @Size(min=0)
+    @Min(0)
     private int sickLeave;
-    @Size(min=0)
+    @Min(0)
     private int casualLeave;
-    @Size(min=0)
+    @Min(0)
     private int earnedLeave;
-    @Size(min=0)
+    @Min(0)
     private int maternityLeave;
-    @Size(min=0)
+    @Min(0)
     private int paternityLeave;
     @NotNull
     private Date calendarStartDate;

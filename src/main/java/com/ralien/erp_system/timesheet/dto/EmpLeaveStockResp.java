@@ -1,5 +1,8 @@
 package com.ralien.erp_system.timesheet.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ralien.erp_system.timesheet.util.UnixDateSerializer;
+
 import java.util.Date;
 
 public class EmpLeaveStockResp {
@@ -10,7 +13,9 @@ public class EmpLeaveStockResp {
     private int earnedLeave;
     private int maternityLeave;
     private int paternityLeave;
+    @JsonSerialize(using= UnixDateSerializer.class)
     private Date calendarStartDate;
+    @JsonSerialize(using = UnixDateSerializer.class)
     private Date calendarEndDate;
 
     public int getLeaveStockId() {
@@ -74,6 +79,7 @@ public class EmpLeaveStockResp {
     }
 
     public void setCalendarStartDate(Date calendarStartDate) {
+        System.out.println("date=" + calendarStartDate);
         this.calendarStartDate = calendarStartDate;
     }
 
@@ -82,6 +88,7 @@ public class EmpLeaveStockResp {
     }
 
     public void setCalendarEndDate(Date calendarEndDate) {
+        System.out.println("date=" + calendarEndDate);
         this.calendarEndDate = calendarEndDate;
     }
 }
